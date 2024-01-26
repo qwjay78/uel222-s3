@@ -17,8 +17,10 @@ class CategoryController extends AbstractController
     #[Route('/', name: 'category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
+        $categories = $categoryRepository->findAll();
+
         return $this->render('category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),
+            'categories' => $categories,
         ]);
     }
 
@@ -71,7 +73,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
         }

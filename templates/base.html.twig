@@ -3,10 +3,28 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+         <link rel="stylesheet" href="{{ asset('vendor/twbs/bootstrap/dist/css/bootstrap.min.css') }}">
+        {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {{include("navbar.html.twig")}}
+
+        {% block body %}
+
+    <h2>Liste des Articles</h2>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+        {% endblock %}
+        {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>
