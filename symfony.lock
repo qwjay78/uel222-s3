@@ -97,6 +97,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
@@ -324,6 +327,19 @@
     "symfony/string": {
         "version": "v5.4.2"
     },
+    "symfony/translation": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "e28e27f53663cc34f0be2837aba18e3a1bef8e7b"
+        },
+        "files": [
+            "./config/packages/translation.yaml",
+            "./translations/.gitignore"
+        ]
+    },
     "symfony/translation-contracts": {
         "version": "v2.5.0"
     },
@@ -374,6 +390,22 @@
             "config/packages/dev/web_profiler.yaml",
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "082d754b3bd54b3fc669f278f1eea955cfd23cf5"
+        },
+        "files": [
+            "./assets/app.js",
+            "./assets/styles/app.css",
+            "./config/packages/webpack_encore.yaml",
+            "./package.json",
+            "./webpack.config.js"
         ]
     },
     "symfony/yaml": {

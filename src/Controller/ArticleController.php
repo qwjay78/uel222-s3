@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'article_index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
+        $categories = $categoryRepository->findAll();
+
+        
+        $selectedCategory = $request->query->get('category');
+
+        
+        $articles = $articleRepository->findByCategory($selectedCategory);
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
+            'categories' => $categories,
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
@@ -78,4 +89,16 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/category/{id}', name: 'article_by_category', methods: ['GET'])]
+    public function getByCategory(Category $category, ArticleRepository $articleRepository): Response
+    {
+        $articles = $articleRepository->findByCategory($category);
+
+        return $this->render('article/index.html.twig', [
+            'articles' => $articles,
+            'selectedCategory' => $category->getId(),
+        ]);
+    }
+
+    
 }

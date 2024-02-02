@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap');
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.mb-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.title{
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    animation: fadeInUp 1s ease-in-out;
+}
+.img-fluid{
+    height: 500px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.card-group{
+    margin-inline: 10rem;
+}
+
+.zoom-effect {
+    transition: transform 0.3s ease-in-out;
+}
+
+.zoom-effect:hover {
+    transform: scale(1.01);
+}
+
+.new-article{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.navbar>.container, .navbar>.container-fluid, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container-xl, .navbar>.container-xxl{
+    margin-inline: 5rem;
+}
+
+.list-group-item:hover{
+    background-color: aliceblue;
+    transition: all 0.5s ease-in-out;
+}
+.navbar-nav:hover .nav-link.active:hover, .navbar-nav:hover .nav-link.show:hover, .nav-link:hover{
+    color: rgb(72, 133, 170);
+    transition: color 0.5s ease-in-out;
+}
+
+.mb-4{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.card-index{
+    width: 20rem;
+}
+.card img{
+    height: 200px;
+    object-fit: cover;
+}
+.card-text{
+    height: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+}
+.form-group input{
+    width: 30%;
+}
+
+/* Animations css */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

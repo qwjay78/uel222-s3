@@ -3,9 +3,14 @@
 {% block title %}New Category{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
+    <h1 class="title">Create new Category</h1>
+    <div class="mb-4">
+        <img src="{{ asset('images/animaux.jpg') }}" alt="Bienvenue sur le blog d'Animholi !" class="img-fluid">
+    </div>
 
     {{ include('category/_form.html.twig') }}
-
-    <a href="{{ path('category_index') }}">back to list</a>
+    <br/>
+     <div class="new-article">
+    <a href="{{ path('category_index') }}" class="btn btn-primary mb-4">Retour à la liste</a>
+    </div>
 {% endblock %}

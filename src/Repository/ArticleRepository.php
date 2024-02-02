@@ -19,32 +19,24 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int|null $categoryId
+     * @return Article[]
+     */
+    public function findByCategory($categoryId = null): array
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this->createQueryBuilder('a');
 
-    /*
-    public function findOneBySomeField($value): ?Article
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
+        if ($categoryId !== null) {
+            $query
+                ->join('a.Category', 'c')
+                ->andWhere('c.id = :categoryId')
+                ->setParameter('categoryId', $categoryId);
+        }
+
+        return $query
+            ->orderBy('a.id', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }

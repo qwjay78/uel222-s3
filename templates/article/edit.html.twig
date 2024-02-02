@@ -3,11 +3,17 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
-    <h1>Edit Article</h1>
+    <h1 class="title">Edit Article</h1>
+
+    <div class="mb-4">
+        <img src="{{ asset('images/animaux.jpg') }}" alt="Bienvenue sur le blog d'Animholi !" class="img-fluid">
+    </div>
 
     {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('article_index') }}">back to list</a>
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('article_index') }}" class="btn btn-primary mx-2 mb-4">Retour à la liste</a>
+        {{ include('article/_delete_form.html.twig', {'button_class': 'btn btn-danger mx-2 mb-4'}) }}
+    </div>
 
-    {{ include('article/_delete_form.html.twig') }}
 {% endblock %}

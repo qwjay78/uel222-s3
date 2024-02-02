@@ -3,41 +3,53 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+    <h1 class="title">Article index</h1>
+    <div class="mb-4">
+        <img src="{{ asset('images/animaux.jpg') }}" alt="Bienvenue sur le blog d'Animholi !" class="img-fluid">
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Content</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="mb-3">
+        <strong>Filtrer par catégorie :</strong>
+        <ul class="list-inline list-group list-group-horizontal">
+            <li class="list-inline-item">
+                <a class="list-group-item" href="{{ path('article_index') }}">Toutes</a>
+            </li>
+            {% for category in categories %}
+                <li class="list-inline-item">
+                    <a class="list-group-item" href="{{ path('article_index', {'category': category.id}) }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="row">
         {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>
-                    {% if article.Category.name is defined %}
-                        {{ article.Category.name }}
+            <div class="col-md-4 mb-4">
+                <div class="card card-index">
+                    {% if article.Category.name == 'Chiens' %}
+                        <img src="{{ asset('images/chien.jpg') }}" class="card-img-top" alt="Chiens">
+                    {% elseif article.Category.name == 'Chats' %}
+                        <img src="{{ asset('images/chat.jpg') }}" class="card-img-top" alt="Chats">
+                    {% elseif article.Category.name == 'Reptiles' %}
+                        <img src="{{ asset('images/reptile.jpg') }}" class="card-img-top" alt="Reptiles">
+                    {% else %}
+                        <img src="{{ asset('images/animaux.jpg') }}" class="card-img-top" alt="animaux Image">
                     {% endif %}
-                </td>
-                <td>{{ article.content }}</td>
-                <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.content }}</p>
+                        <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+            <div class="col-md-12">
+                <p>Aucun enregistrement trouvé</p>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('article_new') }}">Create new</a>
+    </div>
+    <div class="new-article">
+    <a href="{{ path('article_new') }}" class="btn btn-primary">Nouvel article</a>
+    </div>
 {% endblock %}
